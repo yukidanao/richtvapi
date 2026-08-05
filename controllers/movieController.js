@@ -83,7 +83,7 @@ exports.getMovieTrailer = async (req, res) => {
     const url = `https://api.themoviedb.org/3/movie/${movieId}/videos`;
     const response = await fetch(url, options);
     const data = await response.json();
-    
+
     const result = data.results.filter(result => result.type == "Trailer");
 
     res.status(200).send(result);
@@ -131,6 +131,58 @@ exports.getTVGenres = async (req, res) => {
     const data = await response.json();
 
     res.status(200).send(data)
+}
+
+exports.getFullTV = async (req, res) => {
+    const page = req.query.page || 1;
+    const { genres } = req.query;
+    let url = `https://api.themoviedb.org/3/discover/tv?page=${page}`;
+
+    if (genres) {
+        url += `&with_genres=${genres}`;
+    }
+
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    res.status(200).send(data);
+}
+
+exports.searchTV = async (req, res) => {
+    const input = req.query.input;
+    const url = `https://api.themoviedb.org/3/search/tv?query=${input}`;
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    res.status(200).send(data);
+}
+
+exports.getTVDetails = async (req, res) => {
+    const tvId = req.params.tvId;
+    const url = `https://api.themoviedb.org/3/tv/${tvId}`;
+    const response = await fetch(url, options);
+    const data = await response.json();
+    
+    res.status(200).send(data);
+}
+
+exports.getTVTrailer = async (req, res) => {
+    const tvId = req.params.tvId;
+    const url = `https://api.themoviedb.org/3/tv/${tvId}/videos`;
+    const response = await fetch(url, options);
+    const data = await response.json();
+    const result = data.results.filter(result => result.type == "Trailer")
+
+    res.status(200).send(result);
+}
+
+exports.getTVLogo = async (req, res) => {
+    const tvId = req.params.tvId;
+    const url = `https://api.themoviedb.org/3/tv/${tvId}/images`;
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    res.status(200).send(data.logos[0]);
 }
 
 exports.getTV = async (req, res) => {

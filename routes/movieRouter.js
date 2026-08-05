@@ -13,7 +13,12 @@ router.get('/discover/movies', movieController.getMovies);
 router.get('/nowplaying/movies', movieController.getNowPlayingMovies);
 router.get('/getmoviebycategory/:category', movieController.getMovieByCategory)
 router.get('/genre', movieController.getGenres);
-router.get('/genre/tv', movieController.getTVGenres);
 router.get('/discover/tv', movieController.getTV);
+router.get('/tv/all', movieController.getFullTV);
+router.get('/tv/search', movieController.searchTV);
+router.get('/tv/details/:tvId', movieController.getTVDetails);
+router.get('/tv/trailer/:tvId', movieController.getTVTrailer);
+router.get('/tv/logo/:tvId', movieController.getTVLogo);
+router.get('/genre/tv', movieController.getTVGenres);
 
 module.exports = router;
