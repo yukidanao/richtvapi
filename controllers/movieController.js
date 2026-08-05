@@ -78,6 +78,17 @@ exports.getMovieDetails = async (req, res) => {
     res.status(200).send(data);
 }
 
+exports.getMovieTrailer = async (req, res) => {
+    const movieId = req.params.movieId;
+    const url = `https://api.themoviedb.org/3/movie/${movieId}/videos`;
+    const response = await fetch(url, options);
+    const data = await response.json();
+    
+    const result = data.results.filter(result => result.type == "Trailer");
+
+    res.status(200).send(result);
+}
+
 exports.getMovieRecommendations = async (req, res) => {
     const movieId = req.params.movieId;
     const url = `https://api.themoviedb.org/3/movie/${movieId}/recommendations`;

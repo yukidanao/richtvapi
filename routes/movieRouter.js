@@ -8,6 +8,7 @@ router.get('/logo/:movieId', movieController.getMovieTitleLogo);
 router.get('/cast/:movieId', movieController.getMovieCast);
 router.get('/details/:movieId', movieController.getMovieDetails);
 router.get('/recommendations/:movieId', movieController.getMovieRecommendations);
+router.get('/trailer/:movieId', movieController.getMovieTrailer);
 router.get('/discover/movies', movieController.getMovies);
 router.get('/nowplaying/movies', movieController.getNowPlayingMovies);
 router.get('/getmoviebycategory/:category', movieController.getMovieByCategory)
