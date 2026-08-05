@@ -202,6 +202,15 @@ exports.getTVCast = async (req, res) => {
     res.status(200).send(result);
 }
 
+exports.getTVRecommendations = async (req, res) => {
+    const tvId = req.params.tvId;
+    const url = `https://api.themoviedb.org/3/tv/${tvId}/recommendations`;
+    const response = await fetch(url, options);
+    const data = await response.json();
+    
+    res.status(200).send(data);
+}
+
 exports.getTV = async (req, res) => {
     const url = 'https://api.themoviedb.org/3/discover/tv';
     const response = await fetch(url, options);

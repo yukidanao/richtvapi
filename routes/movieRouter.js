@@ -21,5 +21,6 @@ router.get('/tv/trailer/:tvId', movieController.getTVTrailer);
 router.get('/tv/logo/:tvId', movieController.getTVLogo);
 router.get('/genre/tv', movieController.getTVGenres);
 router.get('/tv/cast/:tvId', movieController.getTVCast);
+router.get('/tv/recommendations/:tvId', movieController.getTVRecommendations);
 
 module.exports = router;
