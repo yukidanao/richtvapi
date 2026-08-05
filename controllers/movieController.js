@@ -162,7 +162,7 @@ exports.getTVDetails = async (req, res) => {
     const url = `https://api.themoviedb.org/3/tv/${tvId}`;
     const response = await fetch(url, options);
     const data = await response.json();
-    
+
     res.status(200).send(data);
 }
 
@@ -183,6 +183,23 @@ exports.getTVLogo = async (req, res) => {
     const data = await response.json();
 
     res.status(200).send(data.logos[0]);
+}
+
+exports.getTVCast = async (req, res) => {
+    const tvId = req.params.tvId;
+    const url = `https://api.themoviedb.org/3/tv/${tvId}/credits`;
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    const result = data.cast.filter(actor => actor.order < 8)
+        .map(actor => ({
+            id: actor.id,
+            name: actor.name,
+            character: actor.character,
+            profile_path: actor.profile_path
+        }));
+
+    res.status(200).send(result);
 }
 
 exports.getTV = async (req, res) => {
